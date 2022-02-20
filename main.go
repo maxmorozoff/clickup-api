@@ -20,6 +20,11 @@ func main() {
 	clickup_api := "https://api.clickup.com/api/v2/list/"+clickup_list_id+"/task"
 
 	client := &http.Client{}
+
+	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		return
+	})
 	
 	http.HandleFunc("/create-task", func(w http.ResponseWriter, r *http.Request) {
 		log.Println("/create-task", "host:", r.Host, "ip:", r.RemoteAddr)
